@@ -1,0 +1,9 @@
+.idea
+.DS_Store
+*.pyc
+*.swp
+.pytest_cache
+__pycache__
+log
+data
+dict

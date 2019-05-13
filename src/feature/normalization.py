@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+# @Time    : 2018/11/13 下午4:45
+# @Author  : Benqi
+
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import Normalizer
+
+from base import Base
+
+class Normalization:
+    def __init__(self, dic_config):
+        Base.__init__(self, dic_config)
+
+    def load_data(self):
+        self.file = pd.read_csv(self.dic_config['data_path'])
+        self.x = self.file.drop([self.dic_config['tag']], axis=1)
+        self.x = np.array(self.x)
+
+    def feature_engineer(self):
+        normal = Normalizer()
+        self.x_normal = normal.fit_transform(self.x)
+
+    def dump(self):
+        np.savetxt(self.dic_config['feature_path'], self.x_normal, fmt='%s', delimiter=',')
